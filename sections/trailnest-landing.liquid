@@ -1,0 +1,755 @@
+{% comment %}
+  TrailNest landing page section.
+  Built as a self-contained Shopify section so it can be previewed safely on an unpublished theme.
+{% endcomment %}
+
+<section class="tn-page" data-section-id="{{ section.id }}">
+  <style>
+    .tn-page {
+      --tn-green: #103a29;
+      --tn-green-2: #184f39;
+      --tn-cream: #f7f2ea;
+      --tn-card: #fffaf3;
+      --tn-ink: #14251d;
+      --tn-muted: #637083;
+      --tn-orange: #dd6a43;
+      --tn-border: #e5ded3;
+      background: #fff;
+      color: var(--tn-ink);
+      font-family: inherit;
+    }
+
+    .tn-page * {
+      box-sizing: border-box;
+    }
+
+    .tn-wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .tn-trust {
+      background: var(--tn-green);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      text-align: center;
+      padding: 10px 12px;
+    }
+
+    .tn-trust span {
+      display: inline-block;
+      margin: 0 7px;
+      color: #c58d6f;
+    }
+
+    .tn-hero {
+      background:
+        radial-gradient(circle at 84% 8%, rgba(221, 106, 67, .18), transparent 30%),
+        linear-gradient(180deg, #fff 0%, var(--tn-cream) 100%);
+      padding: 44px 0 52px;
+    }
+
+    .tn-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, .98fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .tn-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--tn-orange);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .tn-kicker:before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    .tn-title {
+      margin: 0;
+      color: var(--tn-green);
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: .98;
+      letter-spacing: 0;
+      max-width: 760px;
+    }
+
+    .tn-subtitle {
+      margin: 22px 0 0;
+      color: #3f4c59;
+      font-size: clamp(17px, 2.2vw, 22px);
+      line-height: 1.55;
+      max-width: 680px;
+    }
+
+    .tn-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 28px 0 0;
+      align-items: center;
+    }
+
+    .tn-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 26px;
+      border-radius: 7px;
+      background: var(--tn-orange);
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+      border: 0;
+      box-shadow: 0 12px 22px rgba(221, 106, 67, .2);
+    }
+
+    .tn-btn:hover {
+      color: #fff;
+      opacity: .94;
+    }
+
+    .tn-link {
+      color: var(--tn-green);
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .tn-bullets {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+      max-width: 620px;
+    }
+
+    .tn-bullets li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: #304238;
+      font-size: 15px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .tn-check {
+      flex: 0 0 auto;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(16, 58, 41, .12);
+      color: var(--tn-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .tn-product-card {
+      background: #fff;
+      border: 1px solid var(--tn-border);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 20px 50px rgba(16, 58, 41, .14);
+    }
+
+    .tn-image-frame {
+      border-radius: 10px;
+      background: #f4efe6;
+      border: 1px solid var(--tn-border);
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .tn-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      mix-blend-mode: multiply;
+    }
+
+    .tn-card-caption {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 18px 2px 2px;
+    }
+
+    .tn-card-caption strong {
+      color: var(--tn-green);
+      font-size: 20px;
+      line-height: 1.15;
+    }
+
+    .tn-price {
+      color: var(--tn-orange);
+      font-size: 25px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .tn-section {
+      padding: 58px 0;
+    }
+
+    .tn-section.tn-alt {
+      background: var(--tn-cream);
+    }
+
+    .tn-section-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 32px;
+    }
+
+    .tn-section-head h2 {
+      margin: 0;
+      color: var(--tn-green);
+      font-size: clamp(29px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .tn-section-head p {
+      margin: 14px 0 0;
+      color: var(--tn-muted);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .tn-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .tn-feature {
+      background: #fff;
+      border: 1px solid var(--tn-border);
+      border-radius: 10px;
+      padding: 22px;
+      min-height: 190px;
+      box-shadow: 0 10px 28px rgba(16, 58, 41, .06);
+    }
+
+    .tn-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: rgba(221, 106, 67, .12);
+      color: var(--tn-orange);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+
+    .tn-feature h3 {
+      margin: 0;
+      color: var(--tn-green);
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .tn-feature p {
+      margin: 10px 0 0;
+      color: var(--tn-muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .tn-package-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .tn-package {
+      background: #fff;
+      border: 1px solid var(--tn-border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(16, 58, 41, .08);
+    }
+
+    .tn-package .tn-image-frame {
+      border: 0;
+      border-radius: 0;
+      aspect-ratio: 1.18 / 1;
+    }
+
+    .tn-package-body {
+      padding: 24px;
+    }
+
+    .tn-package-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .tn-package-title h3 {
+      margin: 0;
+      color: var(--tn-green);
+      font-size: 24px;
+      line-height: 1.15;
+    }
+
+    .tn-package-title .tn-price {
+      font-size: 23px;
+    }
+
+    .tn-package p {
+      margin: 0;
+      color: var(--tn-muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .tn-package .tn-btn {
+      width: 100%;
+      min-height: 48px;
+      margin-top: 20px;
+      background: var(--tn-green);
+      box-shadow: none;
+    }
+
+    .tn-specs {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .tn-spec-card {
+      background: #fff;
+      border: 1px solid var(--tn-border);
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 12px 30px rgba(16, 58, 41, .07);
+    }
+
+    .tn-spec-card h3 {
+      margin: 0 0 12px;
+      color: var(--tn-green);
+      font-size: 24px;
+    }
+
+    .tn-included {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .tn-included span {
+      background: var(--tn-cream);
+      border-radius: 8px;
+      padding: 12px;
+      color: var(--tn-green);
+      font-weight: 750;
+      font-size: 14px;
+    }
+
+    .tn-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 1px solid var(--tn-border);
+      border-radius: 10px;
+      overflow: hidden;
+      display: table;
+    }
+
+    .tn-table th,
+    .tn-table td {
+      border-bottom: 1px solid var(--tn-border);
+      padding: 16px 18px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .tn-table tr:last-child th,
+    .tn-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .tn-table th {
+      width: 32%;
+      color: var(--tn-green);
+      background: #fbf8f1;
+      font-weight: 850;
+    }
+
+    .tn-faq {
+      display: grid;
+      gap: 12px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .tn-faq details {
+      background: #fff;
+      border: 1px solid var(--tn-border);
+      border-radius: 9px;
+      padding: 18px 20px;
+    }
+
+    .tn-faq summary {
+      cursor: pointer;
+      color: var(--tn-green);
+      font-weight: 850;
+      font-size: 17px;
+    }
+
+    .tn-faq p {
+      margin: 12px 0 0;
+      color: var(--tn-muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .tn-final {
+      background: var(--tn-green);
+      color: #fff;
+      text-align: center;
+      padding: 52px 0;
+    }
+
+    .tn-final h2 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(30px, 4vw, 48px);
+      letter-spacing: 0;
+      line-height: 1.08;
+    }
+
+    .tn-final p {
+      margin: 14px auto 26px;
+      max-width: 660px;
+      color: rgba(255,255,255,.82);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 900px) {
+      .tn-hero {
+        padding: 26px 0 40px;
+      }
+
+      .tn-hero-grid,
+      .tn-specs {
+        grid-template-columns: 1fr;
+      }
+
+      .tn-product-card {
+        order: -1;
+      }
+
+      .tn-feature-grid,
+      .tn-package-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .tn-wrap {
+        width: min(100% - 24px, 520px);
+      }
+
+      .tn-trust {
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .tn-title {
+        font-size: 38px;
+      }
+
+      .tn-bullets,
+      .tn-feature-grid,
+      .tn-package-grid,
+      .tn-included {
+        grid-template-columns: 1fr;
+      }
+
+      .tn-card-caption,
+      .tn-package-title {
+        align-items: flex-start;
+      }
+
+      .tn-section {
+        padding: 42px 0;
+      }
+
+      .tn-feature {
+        min-height: auto;
+      }
+
+      .tn-table,
+      .tn-table tbody,
+      .tn-table tr,
+      .tn-table th,
+      .tn-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .tn-table th {
+        border-bottom: 0;
+        padding-bottom: 4px;
+      }
+
+      .tn-table td {
+        padding-top: 4px;
+      }
+    }
+  </style>
+
+  <div class="tn-trust">
+    Secure checkout <span>•</span> Customer support <span>•</span> Shipping calculated at checkout <span>•</span> Returns according to store policy
+  </div>
+
+  <div class="tn-hero">
+    <div class="tn-wrap tn-hero-grid">
+      <div>
+        <div class="tn-kicker">Family Camping Tent</div>
+        <h1 class="tn-title">Family Inflatable Cabin Tent for Easier Outdoor Stays</h1>
+        <p class="tn-subtitle">
+          A beige inflatable cabin tent with standing-height comfort, mesh windows, and included setup accessories for weekend camping and family trips.
+        </p>
+        <div class="tn-actions">
+          <a class="tn-btn" href="{{ section.settings.cta_url }}">Shop the Tent</a>
+          <a class="tn-link" href="#trailnest-specs">View Specs</a>
+        </div>
+        <ul class="tn-bullets">
+          <li><span class="tn-check">✓</span><span>Inflatable beam structure</span></li>
+          <li><span class="tn-check">✓</span><span>200 cm pitched height</span></li>
+          <li><span class="tn-check">✓</span><span>Mesh windows and side panels</span></li>
+          <li><span class="tn-check">✓</span><span>Carry bag, pump, stakes and guy ropes included</span></li>
+        </ul>
+      </div>
+
+      <div class="tn-product-card">
+        <div class="tn-image-frame">
+          <img src="{{ 'trailnest-tent-white.png' | asset_url }}" alt="Beige inflatable cabin tent on a white background" loading="eager">
+        </div>
+        <div class="tn-card-caption">
+          <strong>TrailNest Family Inflatable Cabin Tent</strong>
+          <span class="tn-price">{{ section.settings.price_text }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tn-section">
+    <div class="tn-wrap">
+      <div class="tn-section-head">
+        <h2>Built for Roomier, Simpler Camping</h2>
+        <p>Designed around practical comfort: more usable cabin space, easier setup, and the core accessories needed to start a family campsite.</p>
+      </div>
+      <div class="tn-feature-grid">
+        <div class="tn-feature">
+          <span class="tn-icon">↕</span>
+          <h3>Standing-Height Cabin</h3>
+          <p>200 cm pitched height gives the tent a more open cabin feel for changing, organizing gear, and relaxing inside.</p>
+        </div>
+        <div class="tn-feature">
+          <span class="tn-icon">◌</span>
+          <h3>Inflatable Setup</h3>
+          <p>The inflatable beam structure helps reduce the fuss of traditional pole setup while keeping the cabin shape stable.</p>
+        </div>
+        <div class="tn-feature">
+          <span class="tn-icon">▦</span>
+          <h3>Mesh Airflow</h3>
+          <p>Large mesh windows and side panels help improve ventilation and visibility during warm-weather camping.</p>
+        </div>
+        <div class="tn-feature">
+          <span class="tn-icon">⌁</span>
+          <h3>Packed for Travel</h3>
+          <p>The packed size is 70 × 36 × 31 cm, with carry bag and setup accessories included for transport.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tn-section tn-alt">
+    <div class="tn-wrap">
+      <div class="tn-section-head">
+        <h2>Choose Your Setup</h2>
+        <p>Start with the core tent package, then add the accessories you want for longer stays or more comfortable camp layouts.</p>
+      </div>
+      <div class="tn-package-grid">
+        <article class="tn-package">
+          <div class="tn-image-frame">
+            <img src="{{ 'trailnest-tent-white.png' | asset_url }}" alt="Standard beige inflatable cabin tent package" loading="lazy">
+          </div>
+          <div class="tn-package-body">
+            <div class="tn-package-title">
+              <h3>Standard Edition</h3>
+              <span class="tn-price">$499</span>
+            </div>
+            <p>Core tent package with carry bag, air pump, stakes, and guy ropes for a clean family camping setup.</p>
+            <a class="tn-btn" href="{{ section.settings.cta_url }}">Configure Standard</a>
+          </div>
+        </article>
+
+        <article class="tn-package">
+          <div class="tn-image-frame">
+            <img src="{{ 'trailnest-tent-white.png' | asset_url }}" alt="Pro beige inflatable cabin tent package" loading="lazy">
+          </div>
+          <div class="tn-package-body">
+            <div class="tn-package-title">
+              <h3>Pro Pack</h3>
+              <span class="tn-price">$589</span>
+            </div>
+            <p>Includes the core tent package plus room for upgraded camping accessories and a more complete basecamp kit.</p>
+            <a class="tn-btn" href="{{ section.settings.cta_url }}">Configure Pro Pack</a>
+          </div>
+        </article>
+
+        <article class="tn-package">
+          <div class="tn-image-frame">
+            <img src="{{ 'trailnest-tent-white.png' | asset_url }}" alt="Glamping beige inflatable cabin tent package" loading="lazy">
+          </div>
+          <div class="tn-package-body">
+            <div class="tn-package-title">
+              <h3>Glamping Pack</h3>
+              <span class="tn-price">$649</span>
+            </div>
+            <p>A fuller comfort-focused setup for longer weekends, family trips, and a more organized campsite feel.</p>
+            <a class="tn-btn" href="{{ section.settings.cta_url }}">Configure Glamping</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <div class="tn-section" id="trailnest-specs">
+    <div class="tn-wrap tn-specs">
+      <div class="tn-spec-card">
+        <h3>What’s Included</h3>
+        <p>The core package includes the tent body and essential setup accessories shown in your product material.</p>
+        <div class="tn-included">
+          <span>Carry Bag × 1</span>
+          <span>Air Pump × 1</span>
+          <span>Tent Stakes × 14</span>
+          <span>Guy Ropes × 10</span>
+        </div>
+      </div>
+
+      <table class="tn-table" aria-label="TrailNest tent specifications">
+        <tbody>
+          <tr>
+            <th>Pitched Size</th>
+            <td>300 × 210 × 200 cm / 117.1 × 86.7 × 78.7 in</td>
+          </tr>
+          <tr>
+            <th>Packed Size</th>
+            <td>70 × 36 × 31 cm / 27.6 × 14.2 × 12.2 in</td>
+          </tr>
+          <tr>
+            <th>Weight</th>
+            <td>14 kg</td>
+          </tr>
+          <tr>
+            <th>Canopy Material</th>
+            <td>210D Oxford Fabric</td>
+          </tr>
+          <tr>
+            <th>Bottom Material</th>
+            <td>PE ground sheet</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="tn-section tn-alt">
+    <div class="tn-wrap">
+      <div class="tn-section-head">
+        <h2>Common Questions</h2>
+      </div>
+      <div class="tn-faq">
+        <details open>
+          <summary>Is this an inflatable tent?</summary>
+          <p>Yes. This tent uses an inflatable beam structure, so the setup style is different from traditional metal-pole tents.</p>
+        </details>
+        <details>
+          <summary>How much space does it have?</summary>
+          <p>The pitched size is 300 × 210 × 200 cm, giving it a footprint of about 6.3 square meters and a 200 cm pitched height.</p>
+        </details>
+        <details>
+          <summary>What comes in the package?</summary>
+          <p>The package includes the tent, carry bag, air pump, 14 tent stakes, and 10 guy ropes.</p>
+        </details>
+        <details>
+          <summary>Where do I see shipping and returns?</summary>
+          <p>Shipping is calculated at checkout. Returns follow the store policy shown during checkout or on your Shopify policy pages.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <div class="tn-final">
+    <div class="tn-wrap">
+      <h2>Make Your Next Campsite Feel Easier</h2>
+      <p>Roomy cabin shape, practical accessories, and a clean family-camping setup built around your TrailNest tent.</p>
+      <a class="tn-btn" href="{{ section.settings.cta_url }}">Shop the Tent</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TrailNest landing",
+  "settings": [
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "price_text",
+      "label": "Hero price text",
+      "default": "$499"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TrailNest landing"
+    }
+  ]
+}
+{% endschema %}
